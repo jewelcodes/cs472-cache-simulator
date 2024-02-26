@@ -12,11 +12,11 @@
 
 using namespace std;
 
-#define BLOCK_SIZE      16      // constant
-#define BLOCK_COUNT     16      // also constant
+#define BLOCK_SIZE      (1<<BLOCK_SHIFT)    // constant
+#define BLOCK_COUNT     16                  // also constant
 
-#define BLOCK_SHIFT     4       // because 2^4 = 16
-#define BLOCK_MASK      0x0F    // again because 16 blocks
+#define BLOCK_SHIFT     4                   // because 2^4 = 16
+#define BLOCK_MASK      (BLOCK_SIZE-1)      // 0X0F
 
 #define TAG_SHIFT       8           // 4 bits for offset, 4 bits for block
 #define TAG_MASK        0xFFFFFF    // 2^24 as in 32-8=24 --
@@ -43,7 +43,7 @@ private:
 
 public:
     CacheEntry();
-    bool hit(size_t);
+    bool hit(uint32_t);
     uint8_t read(uint32_t);
     void write(uint32_t, uint8_t);
     void display();
