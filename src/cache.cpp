@@ -7,7 +7,7 @@
 #include <cache.h>
 
 /* CONSTRUCTOR */
-Cache::Cache(PhysicalMemory memory, size_t entryCount) {
+Cache::Cache(PhysicalMemory *memory, size_t entryCount) {
     this->memory = memory;
     this->entryCount = entryCount;
     this->entry.reserve(entryCount);

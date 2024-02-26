@@ -47,11 +47,11 @@ public:
 class Cache {
 private:
     vector<CacheEntry> entry;
-    PhysicalMemory memory;
+    PhysicalMemory *memory;
     size_t entryCount;
 
 public:
-    Cache(PhysicalMemory, size_t);
+    Cache(PhysicalMemory *, size_t);
     uint8_t read(uint32_t);
     void write(uint32_t, uint8_t);
 };
