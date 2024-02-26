@@ -56,3 +56,23 @@ void CacheEntry::display() {
 
     cout << endl;
 }
+
+/* INDIVIDUAL READS/WRITES FROM A SINGLE CACHE ENTRY */
+uint8_t CacheEntry::read(uint32_t offset) {
+    return this->block[offset&BLOCK_MASK];
+}
+
+void CacheEntry::write(uint32_t offset, uint8_t data) {
+    this->block[offset&BLOCK_MASK] = data;
+}
+
+bool CacheEntry::hit(uint32_t address) {
+    uint32_t tag = (address >> TAG_SHIFT) & TAG_MASK;
+
+    if(this->valid && this->tag == tag) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
