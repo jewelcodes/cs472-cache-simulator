@@ -13,7 +13,10 @@
 using namespace std;
 
 #define BLOCK_SIZE      16      // constant
-#define BLOCK_COUNT     16
+#define BLOCK_COUNT     16      // also constant
+
+#define BLOCK_SHIFT     4       // because 2^4 = 16
+#define BLOCK_MASK      0x0F    // again because 16 blocks
 
 // PhysicalMemory: we will use this class to track "physical" memory
 class PhysicalMemory {
