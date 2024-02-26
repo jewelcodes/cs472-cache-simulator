@@ -42,6 +42,7 @@ public:
     bool hit(size_t);
     uint8_t read(uint32_t);
     void write(uint32_t, uint8_t);
+    void populate(uint32_t);
 };
 
 class Cache {
