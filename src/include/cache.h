@@ -17,7 +17,7 @@ using namespace std;
 // PhysicalMemory: we will use this class to track "physical" memory
 class PhysicalMemory {
 private:
-    uint8_t *memory;    // array where we'll store the memory
+    vector<uint8_t> memory;    // where we'll store the memory
     size_t size;
 
 public:
