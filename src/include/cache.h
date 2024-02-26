@@ -53,9 +53,11 @@ private:
     vector<CacheEntry> entry;
     PhysicalMemory *memory;
     size_t entryCount;
+    void fetch(uint32_t);
 
 public:
     Cache(PhysicalMemory *, size_t);
     uint8_t read(uint32_t);
     void write(uint32_t, uint8_t);
+    void display();
 };
