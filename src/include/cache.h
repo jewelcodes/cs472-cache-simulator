@@ -18,6 +18,10 @@ using namespace std;
 #define BLOCK_SHIFT     4       // because 2^4 = 16
 #define BLOCK_MASK      0x0F    // again because 16 blocks
 
+#define TAG_SHIFT       8           // 4 bits for offset, 4 bits for block
+#define TAG_MASK        0xFFFFFF    // 2^24 as in 32-8=24 --
+                // this also allows this program to be extended for larger memory size simulation
+
 // PhysicalMemory: we will use this class to track "physical" memory
 class PhysicalMemory {
 private:
@@ -42,7 +46,6 @@ public:
     bool hit(size_t);
     uint8_t read(uint32_t);
     void write(uint32_t, uint8_t);
-    void populate(uint32_t);
 };
 
 class Cache {
