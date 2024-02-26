@@ -46,6 +46,7 @@ public:
     bool hit(size_t);
     uint8_t read(uint32_t);
     void write(uint32_t, uint8_t);
+    void display();
 };
 
 class Cache {

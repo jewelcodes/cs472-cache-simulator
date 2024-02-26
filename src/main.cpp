@@ -8,5 +8,9 @@
 #include <cache.h>
 
 int main(int argc, char **argv) {
+    PhysicalMemory memory(2048);
+    Cache cache(&memory, BLOCK_COUNT);
+
+    cache.display();
     return 0;
 }
