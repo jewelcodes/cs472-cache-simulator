@@ -64,6 +64,7 @@ uint8_t CacheEntry::read(uint32_t offset) {
 
 void CacheEntry::write(uint32_t offset, uint8_t data) {
     this->block[offset&BLOCK_MASK] = data;
+    this->dirty = true;
 }
 
 bool CacheEntry::hit(uint32_t address) {
@@ -76,3 +77,40 @@ bool CacheEntry::hit(uint32_t address) {
     }
 }
 
+void CacheEntry::populate(uint32_t address) {
+    uint32_t tag = (address >> TAG_SHIFT) & TAG_MASK;
+
+    this->valid = true;
+    this->dirty = false;
+    this->tag = tag;
+}
+
+/*
+ * read(): reads from memory
+ * Parameters: address - address to read
+ * Returns: value at said address
+ */
+
+uint8_t Cache::read(uint32_t address) {
+    // first, let's check if we have a hit
+    uint32_t block = (address >> BLOCK_SHIFT) & BLOCK_MASK;
+
+    if(!this->entry[block].hit(address)) {
+        // MISS -- WE NEED TO FETCH FROM MAIN MEMORY
+        this->fetch(address);
+    }
+
+    // hit or recently fetched
+    return this->entry[block].read(address & BLOCK_MASK);
+}
+
+void Cache::fetch(uint32_t address) {
+    uint32_t block = (address >> BLOCK_SHIFT) & BLOCK_MASK;
+    uint32_t blockStart = address & ~BLOCK_MASK;
+
+    for(int i = 0; i < BLOCK_SIZE; i++) {
+        this->entry[block].write((blockStart+i) & BLOCK_MASK, this->memory->read(blockStart+i));
+    }
+
+    this->entry[block].populate(blockStart);
+}
