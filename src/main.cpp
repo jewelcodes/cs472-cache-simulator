@@ -11,7 +11,12 @@ int main(int argc, char **argv) {
     PhysicalMemory memory(2048);
     Cache cache(&memory, BLOCK_COUNT);
 
-    cout << hex << (uint32_t)cache.read(0x7A2) << endl;;
+    // test
+    cache.read(0x7A2);
+    cache.read(0x2E);
+    cache.read(0x2F);
+    cache.read(0x3D5);
     cache.display();
+
     return 0;
 }
