@@ -8,7 +8,7 @@
 #include <iomanip>
 #include <cache.h>
 
-/* CONSTRUCTOR */
+/* CONSTRUCTORS */
 Cache::Cache(PhysicalMemory *memory, size_t entryCount) {
     this->memory = memory;
     this->entryCount = entryCount;
@@ -67,16 +67,28 @@ void CacheEntry::write(uint32_t offset, uint8_t data) {
     this->dirty = true;
 }
 
+/*
+ * hit(): determines whether this cache entry is a hit or miss
+ * Parameters: address - absolute address to read
+ * Returns: true/false
+ */
+
 bool CacheEntry::hit(uint32_t address) {
     uint32_t tag = (address >> TAG_SHIFT) & TAG_MASK;
-
-    if(this->valid && this->tag == tag) {
-        return true;
-    } else {
-        return false;
-    }
+    return (this->valid) && (this->tag == tag);
 }
 
+/*
+ * dirty(): returns whether this cache entry needs to be written to main memory
+ * Parameters: none
+ * Returns: true/false
+ */
+
+bool CacheEntry::dirty() {
+    return (this->valid) && (this->dirty);
+}
+
+/* Helper function after being recently fetched from main memory */
 void CacheEntry::populate(uint32_t address) {
     uint32_t tag = (address >> TAG_SHIFT) & TAG_MASK;
 
@@ -104,11 +116,25 @@ uint8_t Cache::read(uint32_t address) {
     return this->entry[block].read(address & BLOCK_MASK);
 }
 
+/*
+ * fetch(): fetches a block from main memory into the cache
+ * Because we are implementing a writeback cache, this function is also where
+ * main memory is updated - if a block is already in the cache entry we are
+ * trying to access and is dirty, we update main memory before fetching the
+ * new block.
+ * 
+ * Parameters: address - address to fetch
+ * Returns: nothing
+ */
+
 void Cache::fetch(uint32_t address) {
     uint32_t block = (address >> BLOCK_SHIFT) & BLOCK_MASK;
     uint32_t blockStart = address & ~BLOCK_MASK;
 
+    // TODO: Determine if we need to write back before reading
+
     for(int i = 0; i < BLOCK_SIZE; i++) {
+        // read the entire block into the cache from main memory
         this->entry[block].write((blockStart+i) & BLOCK_MASK, this->memory->read(blockStart+i));
     }
 
