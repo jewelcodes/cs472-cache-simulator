@@ -25,20 +25,13 @@ CacheEntry::CacheEntry() {
     }
 }
 
+/* INDIVIDUAL CACHE ENTRY FUNCTIONS */
+
 /*
- * display(): displays the contents of the cache
+ * display(): displays a single cache entry
  * Parameters: None
  * Returns: Nothing
  */
-
-void Cache::display() {
-    cout << " #  V  D  T  DATA" << endl;
-
-    for(int i = 0; i < this->entryCount; i++) {
-        cout << " " << hex << uppercase << setw(1) << i << "  ";
-        this->entry[i].display();
-    }
-}
 
 void CacheEntry::display() {
     if(this->valid) {
@@ -65,7 +58,8 @@ void CacheEntry::display() {
     cout << endl;
 }
 
-/* INDIVIDUAL READS/WRITES FROM A SINGLE CACHE ENTRY */
+/* READS AND WRITES FROM/TO A SINGLE CACHE ENTRY */
+
 uint8_t CacheEntry::read(uint32_t offset) {
     return this->block[offset&BLOCK_MASK];
 }
@@ -97,12 +91,30 @@ bool CacheEntry::isDirty() {
 }
 
 /* Helper function after being recently fetched from main memory */
+
 void CacheEntry::populate(uint32_t address) {
     uint32_t tag = (address >> TAG_SHIFT) & TAG_MASK;
 
     this->valid = true;
     this->dirty = false;
     this->tag = tag;
+}
+
+/* MAIN CACHE FUNCTIONS, NOT FOR INDIVIDUAL ENTRIES */
+
+/*
+ * display(): displays the contents of the cache
+ * Parameters: None
+ * Returns: Nothing
+ */
+
+void Cache::display() {
+    cout << " #  V  D  T  DATA" << endl;
+
+    for(int i = 0; i < this->entryCount; i++) {
+        cout << " " << hex << uppercase << setw(1) << i << "  ";
+        this->entry[i].display();
+    }
 }
 
 /*
