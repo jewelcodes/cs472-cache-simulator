@@ -28,6 +28,16 @@ CacheEntry::CacheEntry() {
 /* INDIVIDUAL CACHE ENTRY FUNCTIONS */
 
 /*
+ * getTag(): returns the tag associated with this entry
+ * Parameters: none
+ * Returns: tag
+ */
+
+uint32_t CacheEntry::getTag() {
+    return this->tag;
+}
+
+/*
  * display(): displays a single cache entry
  * Parameters: None
  * Returns: Nothing
@@ -130,10 +140,19 @@ uint8_t Cache::read(uint32_t address) {
     if(!this->entry[block].hit(address)) {
         // MISS -- WE NEED TO FETCH FROM MAIN MEMORY
         this->fetch(address);
+        cout << "(miss) ";
+    } else {
+        cout << "(hit) ";
     }
 
     // hit or recently fetched
-    return this->entry[block].read(address & BLOCK_MASK);
+    uint8_t value = this->entry[block].read(address & BLOCK_MASK);
+    cout << "read value 0x";
+    cout << hex << uppercase << setw(2) << setfill('0') << (uint32_t)value;
+    cout << " from address 0x";
+    cout << hex << uppercase << setw(3) << setfill('0') << address << endl;
+    
+    return value;
 }
 
 /*
@@ -149,11 +168,18 @@ void Cache::write(uint32_t address, uint8_t value) {
 
     if(!this->entry[block].hit(address)) {
         // MISS -- WE NEED TO FETCH FROM MAIN MEMORY
+        cout << "(miss) ";
         this->fetch(address);
+    } else {
+        cout << "(hit) ";
     }
 
     // hit or recently fetched
     this->entry[block].write(address & BLOCK_MASK, value);
+    cout << "wrote value 0x";
+    cout << hex << uppercase << setw(2) << setfill('0') << (uint32_t)value;
+    cout << " to address 0x";
+    cout << hex << uppercase << setw(3) << setfill('0') << address << endl;
 }
 
 /*
@@ -171,7 +197,21 @@ void Cache::fetch(uint32_t address) {
     uint32_t block = (address >> BLOCK_SHIFT) & BLOCK_MASK;
     uint32_t blockStart = address & ~BLOCK_MASK;
 
-    // TODO: Determine if we need to write back before reading
+    // determine if we need to write back to main memory before reusing this cache entry
+    if(this->entry[block].isDirty()) {
+        // calculate address of the dirty block from the tag and slot number
+        uint32_t dirtyBlock = this->entry[block].getTag() << TAG_SHIFT;
+        dirtyBlock |= (block << BLOCK_SHIFT);
+
+        cout << "(writeback) updating main memory block range 0x";
+        cout << hex << uppercase << setw(3) << setfill('0') << dirtyBlock << "-0x";
+        cout << hex << uppercase << setw(3) << setfill('0') << dirtyBlock+BLOCK_SIZE-1 << endl;
+
+        // now write the contents of the dirty cache to main memory
+        for(int i = 0; i < BLOCK_SIZE; i++) {
+            this->memory->write(dirtyBlock+i, this->entry[block].read((dirtyBlock+i) & BLOCK_MASK));
+        }
+    }
 
     for(int i = 0; i < BLOCK_SIZE; i++) {
         // read the entire block into the cache from main memory

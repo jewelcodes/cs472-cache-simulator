@@ -49,6 +49,7 @@ public:
     uint8_t read(uint32_t);
     void write(uint32_t, uint8_t);
     void display();
+    uint32_t getTag();
 };
 
 class Cache {
