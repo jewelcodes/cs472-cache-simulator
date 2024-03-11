@@ -44,7 +44,7 @@ private:
 public:
     CacheEntry();
     bool hit(uint32_t);
-    bool dirty();
+    bool isDirty();
     void populate(uint32_t);
     uint8_t read(uint32_t);
     void write(uint32_t, uint8_t);

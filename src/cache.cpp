@@ -32,7 +32,7 @@ CacheEntry::CacheEntry() {
  */
 
 void Cache::display() {
-    cout << " #  V  T  DATA" << endl;
+    cout << " #  V  D  T  DATA" << endl;
 
     for(int i = 0; i < this->entryCount; i++) {
         cout << " " << hex << uppercase << setw(1) << i << "  ";
@@ -42,6 +42,14 @@ void Cache::display() {
 
 void CacheEntry::display() {
     if(this->valid) {
+        cout << "1";
+    } else {
+        cout << "0";
+    }
+
+    cout << "  ";
+
+    if(this->dirty) {
         cout << "1";
     } else {
         cout << "0";
@@ -79,12 +87,12 @@ bool CacheEntry::hit(uint32_t address) {
 }
 
 /*
- * dirty(): returns whether this cache entry needs to be written to main memory
+ * isDirty(): returns whether this cache entry needs to be written to main memory
  * Parameters: none
  * Returns: true/false
  */
 
-bool CacheEntry::dirty() {
+bool CacheEntry::isDirty() {
     return (this->valid) && (this->dirty);
 }
 
