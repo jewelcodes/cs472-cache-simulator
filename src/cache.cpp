@@ -137,6 +137,26 @@ uint8_t Cache::read(uint32_t address) {
 }
 
 /*
+ * write(): writes to memory
+ * Parameters: address - address to write to
+ * Parameters: value - value to write
+ * Returns: nothing
+ */
+
+void Cache::write(uint32_t address, uint8_t value) {
+    // first, let's check if we have a hit
+    uint32_t block = (address >> BLOCK_SHIFT) & BLOCK_MASK;
+
+    if(!this->entry[block].hit(address)) {
+        // MISS -- WE NEED TO FETCH FROM MAIN MEMORY
+        this->fetch(address);
+    }
+
+    // hit or recently fetched
+    this->entry[block].write(address & BLOCK_MASK, value);
+}
+
+/*
  * fetch(): fetches a block from main memory into the cache
  * Because we are implementing a writeback cache, this function is also where
  * main memory is updated - if a block is already in the cache entry we are

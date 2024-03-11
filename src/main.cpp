@@ -16,6 +16,7 @@ int main(int argc, char **argv) {
     cache.read(0x2E);
     cache.read(0x2F);
     cache.read(0x3D5);
+    cache.write(0x7A2, 0x88);
     cache.display();
 
     return 0;
