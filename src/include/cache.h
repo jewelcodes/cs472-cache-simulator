@@ -12,17 +12,17 @@
 
 using namespace std;
 
-#define BLOCK_SIZE      (1<<BLOCK_SHIFT)    // constant
-#define BLOCK_COUNT     16                  // also constant
+#define BLOCK_SHIFT     4                   // constant -- block size = 16 = 2^4
+#define BLOCK_SIZE      (1<<BLOCK_SHIFT)    // constant from above
 
-#define BLOCK_SHIFT     4                   // because 2^4 = 16
+#define BLOCK_COUNT     16                  // also constant
 #define BLOCK_MASK      (BLOCK_SIZE-1)      // 0X0F
 
 #define TAG_SHIFT       8           // 4 bits for offset, 4 bits for block
 #define TAG_MASK        0xFFFFFF    // 2^24 as in 32-8=24 --
                 // this also allows this program to be extended for larger memory size simulation
 
-// PhysicalMemory: we will use this class to track "physical" memory
+// PhysicalMemory: we will use this class to track "physical" or main memory
 class PhysicalMemory {
 private:
     vector<uint8_t> memory;    // where we'll store the memory
