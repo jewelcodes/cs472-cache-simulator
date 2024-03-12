@@ -11,20 +11,42 @@ int main(int argc, char **argv) {
     PhysicalMemory memory(2048);
     Cache cache(&memory, BLOCK_COUNT);
 
-    // test
-    /*cache.read(0x7A2);
-    cache.read(0x2E);
-    cache.read(0x2F);
-    cache.read(0x3D5);
-    cache.write(0x7A2, 0x88);*/
+    // now make some kind of interactive prompt
+    bool quit = false;
+    string input;
+    uint32_t address;
+    uint8_t value;
 
-    //cache.display();
+    while(!quit) {
+        cout << "(r)ead, (w)rite, (d)isplay cache, load (s)cript, or (q)uit? ";
+        cin >> input;
 
-    cache.write(0x150, 0xF3);
-    cache.write(0x155, 0x7D);
-    cache.read(0x250);
-    cache.read(0x150);
-    cache.display();
+        if(input == "r" || input == "R") {
+            cout << "address to read? ";
+            cin >> input;
+            address = stoi(input, 0, 16);
+
+            cache.read(address);
+        } else if(input == "w" || input == "W") {
+            cout << "address to write? ";
+            cin >> input;
+            address = stoi(input, 0, 16);
+
+            cout << "value to write? ";
+            cin >> input;
+            value = stoi(input, 0, 16);
+
+            cache.write(address, value);
+        } else if(input == "d" || input == "D") {
+            cache.display();
+        } else if(input == "q" || input == "Q") {
+            break;
+        } else {
+            cout << "undefined command: " << input << endl;
+        }
+
+        cout << endl;
+    }
 
     return 0;
 }
