@@ -65,3 +65,13 @@ public:
     void write(uint32_t, uint8_t);
     void display();
 };
+
+/* this is to automate the testing */
+class Script {
+private:
+    Cache *cache;
+
+public:
+    Script(Cache *);
+    void execute(string);
+};

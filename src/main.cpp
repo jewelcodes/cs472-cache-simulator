@@ -39,6 +39,12 @@ int main(int argc, char **argv) {
             cache.write(address, value);
         } else if(input == "d" || input == "D") {
             cache.display();
+        } else if(input == "s" || input == "S") {
+            cout << "file name of the script containing list of references? ";
+            cin >> input;
+
+            Script script(&cache);
+            script.execute(input);
         } else if(input == "q" || input == "Q") {
             break;
         } else {
