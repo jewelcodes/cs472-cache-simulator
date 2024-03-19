@@ -1,0 +1,120 @@
+➜  cs472-cache-simulator git:(main) ✗ make
+ [  CXX  ] src/memory.cpp
+ [  CXX  ] src/script.cpp
+ [  CXX  ] src/cache.cpp
+ [  CXX  ] src/main.cpp
+ [  LD   ] cache-sim
+➜  cs472-cache-simulator git:(main) ✗ ./cache-sim readtest.txt 
+(miss) read value 0xA2 from address 0x7A2
+(miss) read value 0x2E from address 0x02E
+(hit) read value 0x2F from address 0x02F
+(miss) read value 0xD5 from address 0x3D5
+ #  V  D  T  DATA
+ 0  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 1  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 2  1  0  0  20 21 22 23 24 25 26 27 28 29 2A 2B 2C 2D 2E 2F 
+ 3  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 4  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 5  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 6  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 7  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 8  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 9  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ A  1  0  7  A0 A1 A2 A3 A4 A5 A6 A7 A8 A9 AA AB AC AD AE AF 
+ B  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ C  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ D  1  0  3  D0 D1 D2 D3 D4 D5 D6 D7 D8 D9 DA DB DC DD DE DF 
+ E  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ F  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+➜  cs472-cache-simulator git:(main) ✗ ./cache-sim fulltest.txt 
+(miss) read value 0x05 from address 0x005
+(hit) read value 0x06 from address 0x006
+(hit) read value 0x07 from address 0x007
+(miss) read value 0x4C from address 0x14C
+(hit) read value 0x4D from address 0x14D
+(hit) read value 0x4E from address 0x14E
+(hit) read value 0x4F from address 0x14F
+(miss) read value 0x50 from address 0x150
+(hit) read value 0x51 from address 0x151
+(miss) read value 0xA6 from address 0x3A6
+(miss) read value 0xC3 from address 0x4C3
+ #  V  D  T  DATA
+ 0  1  0  0  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 
+ 1  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 2  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 3  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 4  1  0  1  40 41 42 43 44 45 46 47 48 49 4A 4B 4C 4D 4E 4F 
+ 5  1  0  1  50 51 52 53 54 55 56 57 58 59 5A 5B 5C 5D 5E 5F 
+ 6  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 7  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 8  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 9  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ A  1  0  3  A0 A1 A2 A3 A4 A5 A6 A7 A8 A9 AA AB AC AD AE AF 
+ B  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ C  1  0  4  C0 C1 C2 C3 C4 C5 C6 C7 C8 C9 CA CB CC CD CE CF 
+ D  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ E  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ F  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+(hit) wrote value 0x99 to address 0x14C
+(miss) wrote value 0x07 to address 0x63B
+(miss) read value 0x82 from address 0x582
+ #  V  D  T  DATA
+ 0  1  0  0  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 
+ 1  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 2  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 3  1  1  6  30 31 32 33 34 35 36 37 38 39 3A 07 3C 3D 3E 3F 
+ 4  1  1  1  40 41 42 43 44 45 46 47 48 49 4A 4B 99 4D 4E 4F 
+ 5  1  0  1  50 51 52 53 54 55 56 57 58 59 5A 5B 5C 5D 5E 5F 
+ 6  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 7  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 8  1  0  5  80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F 
+ 9  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ A  1  0  3  A0 A1 A2 A3 A4 A5 A6 A7 A8 A9 AA AB AC AD AE AF 
+ B  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ C  1  0  4  C0 C1 C2 C3 C4 C5 C6 C7 C8 C9 CA CB CC CD CE CF 
+ D  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ E  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ F  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+(writeback) updating main memory block range 0x140-0x14F
+(miss) read value 0x48 from address 0x348
+(writeback) updating main memory block range 0x630-0x63F
+(miss) read value 0x3F from address 0x03F
+ #  V  D  T  DATA
+ 0  1  0  0  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 
+ 1  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 2  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 3  1  0  0  30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3E 3F 
+ 4  1  0  3  40 41 42 43 44 45 46 47 48 49 4A 4B 4C 4D 4E 4F 
+ 5  1  0  1  50 51 52 53 54 55 56 57 58 59 5A 5B 5C 5D 5E 5F 
+ 6  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 7  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 8  1  0  5  80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F 
+ 9  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ A  1  0  3  A0 A1 A2 A3 A4 A5 A6 A7 A8 A9 AA AB AC AD AE AF 
+ B  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ C  1  0  4  C0 C1 C2 C3 C4 C5 C6 C7 C8 C9 CA CB CC CD CE CF 
+ D  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ E  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ F  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+(miss) read value 0x4B from address 0x14B
+(hit) read value 0x99 from address 0x14C
+(miss) read value 0x3F from address 0x63F
+(miss) read value 0x83 from address 0x083
+ #  V  D  T  DATA
+ 0  1  0  0  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 
+ 1  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 2  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 3  1  0  6  30 31 32 33 34 35 36 37 38 39 3A 07 3C 3D 3E 3F 
+ 4  1  0  1  40 41 42 43 44 45 46 47 48 49 4A 4B 99 4D 4E 4F 
+ 5  1  0  1  50 51 52 53 54 55 56 57 58 59 5A 5B 5C 5D 5E 5F 
+ 6  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 7  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ 8  1  0  0  80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F 
+ 9  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ A  1  0  3  A0 A1 A2 A3 A4 A5 A6 A7 A8 A9 AA AB AC AD AE AF 
+ B  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ C  1  0  4  C0 C1 C2 C3 C4 C5 C6 C7 C8 C9 CA CB CC CD CE CF 
+ D  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ E  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+ F  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+➜  cs472-cache-simulator git:(main) ✗ 
