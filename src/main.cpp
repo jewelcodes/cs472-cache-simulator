@@ -17,6 +17,13 @@ int main(int argc, char **argv) {
     uint32_t address;
     uint8_t value;
 
+    // if a filename is specified as an argument, just skip the prompt and use that as a script
+    if(argc >= 2) {
+        Script script(&cache);
+        script.execute(argv[1]);
+        return 0;
+    }
+
     while(!quit) {
         cout << "(r)ead, (w)rite, (d)isplay cache, load (s)cript, or (q)uit? ";
         cin >> input;
