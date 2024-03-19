@@ -17,11 +17,12 @@ int main(int argc, char **argv) {
     uint32_t address;
     uint8_t value;
 
-    // if a filename is specified as an argument, just skip the prompt and use that as a script
+    // if a filename is specified as an argument, use that as a script
     if(argc >= 2) {
+        cout << "reading " << argv[1] << " as input..." << endl;
         Script script(&cache);
         script.execute(argv[1]);
-        return 0;
+        //return 0;     // on second thought there's no reason to quit here, give the prompt anyway
     }
 
     while(!quit) {
