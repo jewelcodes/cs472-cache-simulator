@@ -1,10 +1,11 @@
-➜  cs472-cache-simulator git:(main) ✗ make
+➜  cs472-cache-simulator git:(main) ✗ make                    
  [  CXX  ] src/memory.cpp
  [  CXX  ] src/script.cpp
  [  CXX  ] src/cache.cpp
  [  CXX  ] src/main.cpp
  [  LD   ] cache-sim
-➜  cs472-cache-simulator git:(main) ✗ ./cache-sim readtest.txt 
+➜  cs472-cache-simulator git:(main) ✗ ./cache-sim readtest.txt
+reading readtest.txt as input...
 (miss) read value 0xA2 from address 0x7A2
 (miss) read value 0x2E from address 0x02E
 (hit) read value 0x2F from address 0x02F
@@ -26,7 +27,9 @@
  D  1  0  3  D0 D1 D2 D3 D4 D5 D6 D7 D8 D9 DA DB DC DD DE DF 
  E  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
  F  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+(r)ead, (w)rite, (d)isplay cache, load (s)cript, or (q)uit? q
 ➜  cs472-cache-simulator git:(main) ✗ ./cache-sim fulltest.txt 
+reading fulltest.txt as input...
 (miss) read value 0x05 from address 0x005
 (hit) read value 0x06 from address 0x006
 (hit) read value 0x07 from address 0x007
@@ -117,4 +120,5 @@
  D  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
  E  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
  F  0  0  0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+(r)ead, (w)rite, (d)isplay cache, load (s)cript, or (q)uit? q
 ➜  cs472-cache-simulator git:(main) ✗ 
