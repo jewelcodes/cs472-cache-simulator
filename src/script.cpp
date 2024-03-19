@@ -44,6 +44,7 @@ void Script::execute(string filename) {
             this->cache->write(address, value);
         } else if(line[0] == 'p') {
             // this isn't part of the assignment but will make a recording of the submission easier!
+            // UPDATE: funnily enough ended up not using this for anything lol
             pause = !pause;
             if(pause) cout << "press enter after each operation to proceed to the next" << endl;
         }
